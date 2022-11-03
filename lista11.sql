@@ -17,12 +17,10 @@ AND temp.cnt >= 2
 
 SELECT DISTINCT R.cgc, R.nome, T.qtd
 FROM revendedoras R, (
-    SELECT G.cgc, count(A.codigo) qtd
-    FROM garagens G, automoveis A
-    WHERE G.codigo = A.codigo
-    AND G.ano = A.ano 
+    SELECT G.cgc, count(G.codigo) qtd
+    FROM garagens G
     GROUP BY G.cgc
-    HAVING count(A.codigo) <= 3 
+    HAVING count(G.codigo) <= 3 
     ) T
 WHERE R.cgc = T.cgc
 
